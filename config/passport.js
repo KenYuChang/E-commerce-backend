@@ -1,5 +1,4 @@
 const passport = require('passport')
-const bcrypt = require('bcryptjs')
 const { User } = require('../models')
 
 //JWT 

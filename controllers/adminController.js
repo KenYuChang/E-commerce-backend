@@ -4,11 +4,12 @@ const adminController = {
     adminSignIn: async (req, res, next) => {
         try {
             const { account, password } = req.body
-            const { status, message, token, user } = await adminService.signIn(account, password)
+            const { status, message, token, expirationDate, user } = await adminService.signIn(account, password)
             return res.json({
                 status,
                 message,
                 token,
+                expirationDate,
                 user
             })
         } catch (error) {

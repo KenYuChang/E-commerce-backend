@@ -23,10 +23,13 @@ const adminService = {
       }
       const payload = { id: user.id }
       const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '30d' })
+      const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
+      const expirationDate = new Date(decodedToken.exp * 1000) // 转换为日期对象
       return {
         status: 'success',
         message: '登入成功',
         token,
+        expirationDate,
         user: {
           id: user.id,
           account: user.account,
