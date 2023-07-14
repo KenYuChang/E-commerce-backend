@@ -26,7 +26,7 @@ const userService = {
       const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
       const expirationDate = new Date(decodedToken.exp * 1000) // 转换为日期对象
       return {
-        status: 'success',
+        success: true,
         message: '登入成功',
         token,
         expirationDate,

@@ -4,9 +4,9 @@ const adminController = {
     adminSignIn: async (req, res, next) => {
         try {
             const { account, password } = req.body
-            const { status, message, token, expirationDate, user } = await adminService.signIn(account, password)
+            const { success, message, token, expirationDate, user } = await adminService.signIn(account, password)
             return res.json({
-                status,
+                success,
                 message,
                 token,
                 expirationDate,
