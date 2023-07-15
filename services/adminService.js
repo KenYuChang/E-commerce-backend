@@ -47,6 +47,8 @@ const adminService = {
     return product
   },
   postProduct: async (name, description, price, quantity, category_id, file) => {
+    if (!name) throw new Error('Name is required')
+    if (!file) throw new Error('Image is required')
     const filePath = await localFileHandler(file)
     const product = await Product.create({
       name,
