@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const { User, Product, Category } = require('../models')
+const { localFileHandler } = require('../helpers/file-helpers')
 
 
 const adminService = {
@@ -43,6 +44,19 @@ const adminService = {
   },
   getProduct: async(productId) => {
     const product = await Product.findByPk(productId, { include: [{ model: Category }]})
+    return product
+  },
+  postProduct: async (name, description, price, quantity, category_id, file) => {
+    const filePath = await localFileHandler(file)
+    const product = await Product.create({
+      name,
+      description,
+      price,
+      quantity,
+      category_id,
+      image: filePath || null
+    })
+
     return product
   },
 }

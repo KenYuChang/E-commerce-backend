@@ -39,6 +39,26 @@ const adminController = {
         } catch (error) {
             next(error)
         }
-    }
+    },
+    postProduct: async (req, res, next) => {
+        try {
+          const { name, description, price, quantity, category_id } = req.body
+          const { file } = req
+          const product = await adminService.postProduct(
+            name, 
+            description,
+            price,
+            quantity,
+            category_id,
+            file
+          )
+          return res.json({
+            success: true,
+            product
+          })
+        } catch (error) {
+          next(error)
+        }
+      },
 }
 module.exports = adminController
