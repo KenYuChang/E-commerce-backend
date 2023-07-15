@@ -15,6 +15,30 @@ const adminController = {
         } catch (error) {
             next(error)
         }
+    },
+    getProducts: async (req, res, next) => {
+        try {
+            const products = await adminService.getProducts()
+            return res.json({
+                success: true,
+                products
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
+    getProduct: async (req, res, next) => {
+        try {
+            const productId = req.params.id
+            const product = await adminService.getProduct(productId)
+            return res.json({
+                success: true,
+                product
+            })
+
+        } catch (error) {
+            next(error)
+        }
     }
 }
 module.exports = adminController

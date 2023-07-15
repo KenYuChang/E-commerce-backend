@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const { User } = require('../models')
+const { User, Product, Category } = require('../models')
 
 
 const adminService = {
@@ -36,7 +36,15 @@ const adminService = {
           is_admin: user.is_admin
         }
     } 
-  }
+  },
+  getProducts: async() => {
+    const products = await Product.findAll({ include: [{ model: Category }]})
+    return products
+  },
+  getProduct: async(productId) => {
+    const product = await Product.findByPk(productId, { include: [{ model: Category }]})
+    return product
+  },
 }
 
 module.exports = adminService
