@@ -9,6 +9,7 @@ const upload = require('../../middleware/multer')
 router.post('/signin', adminController.adminSignIn)
 // product
 router.get('/products/:id', adminController.getProduct)
+router.post('/products/:id', upload.single('image'), adminController.putProduct)
 router.get('/products', adminController.getProducts)
 router.post('/products', upload.single('image'), adminController.postProduct)
 

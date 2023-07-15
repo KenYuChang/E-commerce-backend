@@ -1,3 +1,4 @@
+const { localFileHandler } = require('../helpers/file-helpers')
 const adminService = require('../services/adminService')
 
 const adminController = {
@@ -60,5 +61,29 @@ const adminController = {
           next(error)
         }
       },
+      putProduct: async(req, res, next) => {
+        try {
+            
+            const { name, description, price, quantity, category_id } = req.body
+            const { file } = req
+            const productId = req.params.id
+            const productData = {
+                name,
+                description,
+                price,
+                quantity,
+                category_id,
+                image: file ? await localFileHandler(file) : null
+            }
+            if (!name) throw new Error('Name is required')
+            const updatedProduct = await adminService.putProduct(productId, productData)
+            return res.json({
+                success: true,
+                updatedProduct,
+            })
+        } catch (error) {
+            next(error)
+        }
+      }
 }
 module.exports = adminController

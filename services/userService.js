@@ -24,7 +24,7 @@ const userService = {
       const payload = { id: user.id }
       const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '30d' })
       const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
-      const expirationDate = new Date(decodedToken.exp * 1000) // 转换为日期对象
+      const expirationDate = new Date(decodedToken.exp * 1000) 
       return {
         success: true,
         message: '登入成功',

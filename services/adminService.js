@@ -46,7 +46,7 @@ const adminService = {
     const product = await Product.findByPk(productId, { include: [{ model: Category }]})
     return product
   },
-  postProduct: async (name, description, price, quantity, category_id, file) => {
+  postProduct: async (name, description, price, quantity, categoryId, file) => {
     if (!name) throw new Error('Name is required')
     if (!file) throw new Error('Image is required')
     const filePath = await localFileHandler(file)
@@ -55,12 +55,19 @@ const adminService = {
       description,
       price,
       quantity,
-      category_id,
+      categoryId,
       image: filePath || null
     })
 
     return product
   },
+  putProduct: async(productId, productData) => {
+    const product = await Product.findByPk(productId)
+    if (!product) throw new Error('Product does not exit')
+    const updatedProduct = await product.update(productData)
+    return updatedProduct
+  },
+  
 }
 
 module.exports = adminService
