@@ -21,7 +21,6 @@ const adminController = {
         try {
             const products = await adminService.getProducts()
             return res.json({
-                success: true,
                 products
             })
         } catch (error) {
@@ -33,7 +32,6 @@ const adminController = {
             const productId = req.params.id
             const product = await adminService.getProduct(productId)
             return res.json({
-                success: true,
                 product
             })
 
@@ -54,7 +52,6 @@ const adminController = {
             file
           )
           return res.json({
-            success: true,
             product
           })
         } catch (error) {
@@ -78,8 +75,18 @@ const adminController = {
             if (!name) throw new Error('Name is required')
             const updatedProduct = await adminService.putProduct(productId, productData)
             return res.json({
-                success: true,
                 updatedProduct,
+            })
+        } catch (error) {
+            next(error)
+        }
+      },
+      deleteProduct: async(req, res, next) => {
+        try {
+            const productId = req.params.id
+            const deletedProduct = await adminService.deleteProduct(productId)
+            return res.json({
+                deletedProduct
             })
         } catch (error) {
             next(error)

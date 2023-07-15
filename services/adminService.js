@@ -40,13 +40,20 @@ const adminService = {
   },
   getProducts: async() => {
     const products = await Product.findAll({ include: [{ model: Category }]})
-    return products
+    return {
+      success: true,
+      message: 'Get all products',
+      products }
   },
   getProduct: async(productId) => {
     const product = await Product.findByPk(productId, { include: [{ model: Category }]})
-    return product
+    return {
+      success: true,
+      message: 'Get one product',
+      product
+    }
   },
-  postProduct: async (name, description, price, quantity, categoryId, file) => {
+  postProduct: async (name, description, price, quantity, category_id, file) => {
     if (!name) throw new Error('Name is required')
     if (!file) throw new Error('Image is required')
     const filePath = await localFileHandler(file)
@@ -55,18 +62,34 @@ const adminService = {
       description,
       price,
       quantity,
-      categoryId,
+      category_id,
       image: filePath || null
     })
 
-    return product
+    return {
+      success: true,
+      message: 'Product create',
+      product
+    }
   },
   putProduct: async(productId, productData) => {
     const product = await Product.findByPk(productId)
     if (!product) throw new Error('Product does not exit')
     const updatedProduct = await product.update(productData)
-    return updatedProduct
+    return {
+      success: true,
+      message: 'product edit',
+      updatedProduct
+    }
   },
+  deleteProduct: async(productId) => {
+    const product = await Product.findByPk(productId)
+    await product.destroy()
+    return {
+      success: true,
+      message: 'Product delete'
+    }
+  }
   
 }
 
