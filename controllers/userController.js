@@ -18,20 +18,20 @@ const userController = {
             next(error)
         }
     },
-    getCurrentUser: async (req, res, next) => {
-        try {
-            const result = req.user.toJSON()
-            delete result.password
-            delete result.account
+    // getCurrentUser: async (req, res, next) => {
+    //     try {
+    //         const result = req.user.toJSON()
+    //         delete result.password
+    //         delete result.account
 
-            return res.json({
-                success: 'true',
-                result
-            })
-        } catch (error) {
-            next(error)
-        }
-    },
+    //         return res.json({
+    //             success: 'true',
+    //             result
+    //         })
+    //     } catch (error) {
+    //         next(error)
+    //     }
+    // },
     logout: async (req, res, next) => {
         try {
             return res.json({
