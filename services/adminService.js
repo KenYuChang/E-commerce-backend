@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const { User, Product, Category } = require('../models')
-const { localFileHandler } = require('../helpers/file-helpers')
+const { localFileHandler, imgurFileHandler } = require('../helpers/file-helpers')
 
 
 const adminService = {
@@ -56,7 +56,7 @@ const adminService = {
   postProduct: async (name, description, price, quantity, category_id, file) => {
     if (!name) throw new Error('Name is required')
     if (!file) throw new Error('Image is required')
-    const filePath = await localFileHandler(file)
+    const filePath = await imgurFileHandler(file)
     const product = await Product.create({
       name,
       description,
