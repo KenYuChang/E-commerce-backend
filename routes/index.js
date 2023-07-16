@@ -8,7 +8,7 @@ const { authenticated } = require('../middleware/api-auth')
 
 router.use('/api/admin', admin)
 router.use('/api/users', users)
-router.get('/api/currentUser', authenticated, userController.getCurrentUser)
+router.get('/api/currentUser', userController.getCurrentUser)
 router.post('/api/logout', userController.logout)
 router.use('/', apiErrorHandler)
 
