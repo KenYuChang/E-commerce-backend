@@ -18,20 +18,18 @@ const userController = {
             next(error)
         }
     },
-    // getCurrentUser: async (req, res, next) => {
-    //     try {
-    //         const result = req.user.toJSON()
-    //         delete result.password
-    //         delete result.account
-
-    //         return res.json({
-    //             success: 'true',
-    //             result
-    //         })
-    //     } catch (error) {
-    //         next(error)
-    //     }
-    // },
+    getCurrentUser: async (req, res, next) => {
+        try {
+            const currentUserId = req.user.id
+            const { currentUser, userOrders } = await userService.getCurrentUser(currentUserId)
+            return res.json({
+                currentUser,
+                userOrders
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
     logout: async (req, res, next) => {
         try {
             return res.json({
