@@ -14,7 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.INTEGER,
     quantity: DataTypes.INTEGER,
     image: DataTypes.STRING,
-    category_id: DataTypes.INTEGER
+    category_id: DataTypes.INTEGER,
+    is_enabled: DataTypes.BOOLEAN,
+    origin_price: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Product',
