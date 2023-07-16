@@ -22,6 +22,9 @@ app.use(passport.initialize())
 
 app.use(routes)
 
+app.get('', (req, res) => {
+  res.send('Hello world!')
+})
 
 app.listen(port, (req, res) => {
     console.log(`Serve is running on http://localhost:${port}`)
