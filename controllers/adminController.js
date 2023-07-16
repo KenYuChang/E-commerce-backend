@@ -41,7 +41,7 @@ const adminController = {
     },
     postProduct: async (req, res, next) => {
         try {
-          const { name, description, price, quantity, category_id } = req.body
+          const { name, description, price, quantity, category_id, origin_price, is_enabled } = req.body
           const { file } = req
           const product = await adminService.postProduct(
             name, 
@@ -49,6 +49,8 @@ const adminController = {
             price,
             quantity,
             category_id,
+            origin_price,
+            is_enabled,
             file
           )
           return res.json({

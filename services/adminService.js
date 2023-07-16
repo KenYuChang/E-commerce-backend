@@ -53,7 +53,7 @@ const adminService = {
       product
     }
   },
-  postProduct: async (name, description, price, quantity, category_id, file) => {
+  postProduct: async (name, description, price, quantity, category_id, origin_price, is_enabled, file) => {
     if (!name) throw new Error('Name is required')
     if (!file) throw new Error('Image is required')
     const filePath = await imgurFileHandler(file)
@@ -63,6 +63,8 @@ const adminService = {
       price,
       quantity,
       category_id,
+      origin_price,
+      is_enabled,
       image: filePath || null
     })
 

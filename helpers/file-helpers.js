@@ -13,7 +13,7 @@ const localFileHandler = file => {
       .catch(err => reject(err))
   })
 }
-// 暫時安裝，之後部署再更改
+
 const imgurFileHandler = file => {
     return new Promise((resolve, reject) => {
       if (!file) return resolve(null)
