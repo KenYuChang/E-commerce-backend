@@ -67,11 +67,14 @@ const adminService = {
       is_enabled,
       image: filePath || null
     })
+    const includedProduct = await Product.findByPk(product.id, {
+      include: Category
+    });
 
     return {
       success: true,
       message: 'Product create',
-      product
+      includedProduct
     }
   },
   putProduct: async(productId, productData) => {
