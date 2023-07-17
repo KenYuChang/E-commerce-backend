@@ -54,7 +54,6 @@ const adminService = {
     }
   },
   postProduct: async (name, description, price, quantity, category_id, origin_price, is_enabled, file) => {
-    if (!name) throw new Error('Name is required')
     const filePath = await imgurFileHandler(file)
     const product = await Product.create({
       name,
