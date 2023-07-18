@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const { User, Product, Category } = require('../models')
+const { User, Product, Category, Order } = require('../models')
 const { localFileHandler, imgurFileHandler } = require('../helpers/file-helpers')
 
 
@@ -53,26 +53,17 @@ const adminService = {
       product
     }
   },
-  postProduct: async (name, description, price, quantity, category_id, origin_price, is_enabled, file) => {
+  postProduct: async (file, body) => {
     const filePath = await imgurFileHandler(file)
     const product = await Product.create({
-      name,
-      description,
-      price,
-      quantity,
-      category_id,
-      origin_price,
-      is_enabled,
+      ...body,
       image: filePath || null
     })
-    const includedProduct = await Product.findByPk(product.id, {
-      include: Category
-    });
 
     return {
       success: true,
       message: 'Product create',
-      includedProduct
+      product
     }
   },
   putProduct: async(productId, productData) => {
@@ -91,6 +82,25 @@ const adminService = {
     return {
       success: true,
       message: 'Product delete'
+    }
+  },
+  getOrders: async() => {
+    const orders = await Order.findAll({
+      order: [['createdAt', 'ASC']]
+    })
+    return {
+      success: true,
+      message: 'get order lists',
+      orders
+    }
+  },
+  putOrders: async(orderId, orderData) => {
+    const order = await Order.findByPk(orderId)
+    const updatedOrder = await order.update(...orderData)
+    return {
+      success: true,
+      message: 'order edit',
+      updatedOrder
     }
   }
   

@@ -13,6 +13,8 @@ router.post('/products/:id', upload.single('image'), adminController.putProduct)
 router.delete('/products/:id', adminController.deleteProduct)
 router.get('/products', adminController.getProducts)
 router.post('/products', upload.single('image'), adminController.postProduct)
+router.get('/orders', adminController.getOrders)
+router.put('/orders/:id', adminController.putOrders)
 
 
 module.exports = router

@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         foreignKey: 'OrderId'
       })
+      Order.belongsTo(models.User)
     }
   };
   Order.init({
